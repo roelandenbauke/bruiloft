@@ -1,8 +1,49 @@
 // ==========================================
+// 0. GASTENCONFIGURATIE (?gast=CODE)
+// ==========================================
+// Vul hier per unieke code de gegevens in.
+// type: 'dag' of 'avond'
+// maxPersonen: het maximale aantal gasten voor deze uitnodiging
+// begroeting: optioneel; als je dit leeg laat wordt "Hoi [naam]!" gebruikt.
+const GASTEN_LIJST = {
+    '3R0K7L1LH': {
+        naam: 'Rianne',
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: 'Lieve Rianne, wat fijn dat je erbij bent op onze mooie dag!'
+    },
+    '3R0L3H5BEL': {
+        naam: 'Rob & Henriët',
+        type: 'avond',
+        maxPersonen: 2,
+        begroeting: 'Lieve Rob & Henriët, we kijken er naar uit om jullie op ons bruilodtfeest te mogen ontvangen!'
+    }
+};
+
+// Standaardinstellingen als iemand de link zonder ?gast=... of met een onbekende code opent
+const STANDAARD_GAST = {
+    naam: '',
+    type: 'dag',
+    maxPersonen: 1,
+    begroeting: ''
+};
+
+function getActieveGast() {
+    const params = new URLSearchParams(window.location.search);
+    const code = (params.get('gast') || '').trim().toLowerCase();
+    if (code && GASTEN_LIJST[code]) {
+        return GASTEN_LIJST[code];
+    }
+    return STANDAARD_GAST;
+}
+
+const actieveGast = getActieveGast();
+
+// ==========================================
 // HERO FOTOSLIDESHOW (EINDELOZE LOOP)
 // ==========================================
 const slides = Array.from(document.querySelectorAll('.hero-stage .slide'));
-const SLIDE_INTERVAL_MS = 3500; // Tijd per foto in milliseconden (3,5 sec)
+const SLIDE_INTERVAL_MS = 3500;
 
 if (slides.length > 1) {
     let activeIndex = 0;
@@ -15,8 +56,38 @@ if (slides.length > 1) {
 }
 
 // ==========================================
-// 1. CARROUSEL
+// 1. PERSOONLIJKE BEGROETING, PLANNING & LOCATIES
 // ==========================================
+const begroetingEl = document.getElementById('persoonlijkeBegroeting');
+if (begroetingEl) {
+    const tekst = actieveGast.begroeting || (actieveGast.naam ? `Hoi ${actieveGast.naam}!` : '');
+    if (tekst) {
+        begroetingEl.textContent = tekst;
+        begroetingEl.hidden = false;
+    } else {
+        begroetingEl.hidden = true;
+    }
+}
+
+// Bij avondgasten alleen kaarten met data-groep="avond" tonen (de nieuwe slide + laatste slide)
+const planningCards = Array.from(document.querySelectorAll('.carousel-track .card'));
+if (actieveGast.type === 'avond') {
+    planningCards.forEach((card) => {
+        const groep = card.getAttribute('data-groep');
+        card.hidden = (groep !== 'avond');
+    });
+}
+
+// Bij avondgasten alleen de tweede locatie (data-locatie="avond") tonen
+const locatieItems = Array.from(document.querySelectorAll('.locatie-items .locatie-item'));
+if (actieveGast.type === 'avond') {
+    locatieItems.forEach((item) => {
+        const locatieType = item.getAttribute('data-locatie');
+        item.hidden = (locatieType !== 'avond');
+    });
+}
+
+// Carrousel
 const viewport = document.querySelector('.carousel-viewport');
 const track = document.querySelector('.carousel-track');
 const prevBtn = document.querySelector('.btn.prev');
@@ -25,10 +96,10 @@ const carouselNextBtn = document.querySelector('.btn.next');
 let currentOffset = 0;
 
 function getStepSize() {
-    const card = track?.querySelector('.card');
-    if (!card || !track) return 0;
+    const zichtbareCard = track?.querySelector('.card:not([hidden])');
+    if (!zichtbareCard || !track) return 0;
     const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    return card.getBoundingClientRect().width + gap;
+    return zichtbareCard.getBoundingClientRect().width + gap;
 }
 
 function getMaxOffset() {
@@ -69,35 +140,8 @@ window.addEventListener('resize', () => {
     updateButtons();
 });
 
-document.querySelectorAll('*').forEach(el => {
-    if (el.getBoundingClientRect().right > window.innerWidth) {
-        console.log('Steekt rechts uit:', el, el.getBoundingClientRect());
-    }
-});
-
 // ==========================================
-// 2. VIDEO + MUTE KNOP
-// ==========================================
-const video = document.getElementById('bgVideo');
-const muteBtn = document.getElementById('muteToggle');
-
-if (video && muteBtn) {
-    muteBtn.addEventListener('click', () => {
-        video.muted = !video.muted;
-
-        const isUnmuted = !video.muted;
-        muteBtn.setAttribute('aria-pressed', String(isUnmuted));
-        muteBtn.setAttribute('aria-label', isUnmuted ? 'Geluid uitzetten' : 'Geluid aanzetten');
-        muteBtn.textContent = isUnmuted ? '🔊 Geluid uit' : '🔇 Geluid aan';
-
-        if (isUnmuted && video.paused) {
-            video.play();
-        }
-    });
-}
-
-// ==========================================
-// 3. RSVP FORMULIER
+// 3. RSVP FORMULIER (MET GASTGEGEVENS)
 // ==========================================
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymhzee1YEidu00_63GFlKRtblAwNENA9GHSFW_YSDtUW7YXc13WUlfEYxbAfPLtaGC/exec';
 
@@ -117,7 +161,35 @@ const naamErrorEl = document.getElementById('naamError');
 const aanwezigErrorEl = document.getElementById('aanwezigError');
 
 const MIN_PERSONEN_JA = 1;
-const MAX_PERSONEN = 20;
+const MAX_PERSONEN = actieveGast.maxPersonen || 20;
+
+function getDieetPrefix() {
+    const huidigeNaam = (form?.naam?.value || actieveGast.naam || '').trim();
+    return huidigeNaam ? `${huidigeNaam} - allergieën: ` : '';
+}
+
+function pasGastVeldenToe() {
+    if (!form) return;
+
+    if (actieveGast.naam && form.naam) {
+        form.naam.value = actieveGast.naam;
+    }
+
+    if (aantalInput) {
+        aantalInput.max = String(MAX_PERSONEN);
+        const startWaarde = Math.min(MIN_PERSONEN_JA, MAX_PERSONEN);
+        aantalInput.value = String(startWaarde);
+    }
+
+    if (form.dieetOpmerkingen) {
+        const prefix = getDieetPrefix();
+        if (prefix && !form.dieetOpmerkingen.value.trim()) {
+            form.dieetOpmerkingen.value = prefix;
+        }
+    }
+}
+
+pasGastVeldenToe();
 
 function clearFieldErrors() {
     if (naamErrorEl) naamErrorEl.textContent = '';
@@ -148,7 +220,7 @@ async function verstuurNaarSheet(payload) {
 
         form?.reset();
         clearFieldErrors();
-        if (aantalInput) aantalInput.value = String(MIN_PERSONEN_JA);
+        pasGastVeldenToe();
         if (stepTwo) stepTwo.hidden = true;
         if (stepOne) stepOne.hidden = false;
         if (rsvpNextBtn) rsvpNextBtn.textContent = 'volgende';
@@ -212,7 +284,13 @@ if (form) {
                 return;
             }
 
-            if (aantalInput) aantalInput.value = String(MIN_PERSONEN_JA);
+            if (aantalInput) {
+                aantalInput.max = String(MAX_PERSONEN);
+                aantalInput.value = String(Math.min(MIN_PERSONEN_JA, MAX_PERSONEN));
+            }
+            if (form.dieetOpmerkingen && !form.dieetOpmerkingen.value.trim()) {
+                form.dieetOpmerkingen.value = `${naam} - allergieën: `;
+            }
             if (stepOne) stepOne.hidden = true;
             if (stepTwo) stepTwo.hidden = false;
         });
