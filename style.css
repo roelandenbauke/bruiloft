@@ -578,3 +578,11 @@ footer p {
     font-size: 14pt;
     line-height: 16pt;
 }
+
+.persoonlijke-begroeting {
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #181c35;
+}
