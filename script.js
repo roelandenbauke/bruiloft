@@ -6,13 +6,13 @@
 // maxPersonen: het maximale aantal gasten voor deze uitnodiging
 // begroeting: optioneel; als je dit leeg laat wordt "Hoi [naam]!" gebruikt.
 const GASTEN_LIJST = {
-    '3R0K7L1': {
+    '3r0k7l1': {
         naam: 'Rianne',
         type: 'dag',
         maxPersonen: 1,
         begroeting: 'Lieve Rianne, wat fijn dat je erbij bent op onze mooie dag!'
     },
-    '3R0L3H5B': {
+    '3r0l3h5': {
         naam: 'Rob & Henriët',
         type: 'avond',
         maxPersonen: 2,
