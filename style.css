@@ -1,0 +1,580 @@
+/* --- Bijzonderheden / standaard --- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: "malila", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.scroll-container::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.scroll-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* --- Basis --- */
+
+html,
+body {
+    color: #181c35;
+    background-color: #ead85b;
+    overflow-x: clip;
+    max-width: 100%;
+    margin: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+header {
+    margin-bottom: 0px;
+}
+
+main,
+footer {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1,
+h2,
+h3,
+p {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+h1,
+h2 {
+    font-family: "malila", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 4rem;
+    line-height: 0.9;
+    margin-bottom: 0px;
+}
+
+h3 {
+    font-size: 2.3rem;
+    line-height: 1;
+    margin-top: 15px;
+}
+
+p {
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
+
+.smal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+    max-width: 700px;
+}
+
+section {
+    margin-top: -20px;
+    margin-bottom: 0px;
+}
+
+.crop-video {
+    width: 383px;
+    height: 526px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px auto;
+}
+
+button {
+    color: #ead85b;
+    background-color: #b83e61;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 600;
+}
+
+a {
+    color: #ead85b;
+    text-decoration: none;
+}
+
+/* --- Header --- */
+
+.agenda-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.header-content {
+    margin-top: -40px;
+    margin: auto;
+    gap: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-header {
+    padding: 25px 25px 0;
+}
+
+.hero-stage {
+    position: relative;
+    width: 100%;
+    height: min(62svh, 520px);
+    margin: 0;
+    border-radius: 26px;
+    overflow: hidden;
+}
+
+/* Op desktop: volledige breedte (min 25px marge) en een stuk minder hoog */
+@media (min-width: 820px) {
+    .hero-stage {
+        height: 44svh;
+        min-height: 500px;
+        max-height: 900px;
+        border-radius: 30px;
+    }
+}
+
+.slideshow-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: 0s;
+    pointer-events: none;
+}
+
+.slide.is-active {
+    opacity: 1;
+}
+
+/* PNG-logo overlay gecentreerd bovenop de foto's */
+.hero-logo-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    max-width: min(82%, 480px);
+    max-height: 48%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* --- Planning --- */
+
+.planning {
+    width: 100%;
+    padding-block: 40px;
+    margin-top: -40px;
+}
+
+.carousel-viewport {
+    overflow-x: clip;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.tekst-card {
+    text-align: center;
+}
+
+.tekst-card h3 {
+    margin-top: 8px;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.tekst-card p {
+    font-weight: 700;
+}
+
+.card {
+    flex: 0 0 340px;
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #ead85b;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card> :not(.card-bg) {
+    position: relative;
+    z-index: 2;
+}
+
+.controls-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-inline: 24px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: #ead85b;
+    background-color: #181c35;
+}
+
+.btn:disabled {
+    background-color: #181c3580;
+}
+
+/* --- RSVP Formulier --- */
+
+.rsvp-form {
+    max-width: 540px;
+    margin: 0 auto;
+    color: #181c35;
+}
+
+.rsvp-title {
+    margin: 0 0 28px;
+    text-align: center;
+}
+
+.rsvp-form .form-group {
+    margin-bottom: 22px;
+}
+
+.rsvp-form .form-group>label,
+.rsvp-form .group-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14pt;
+    line-height: 18pt;
+    color: #181c35;
+}
+
+/* Tekstvelden & textarea */
+.rsvp-form input[type="text"],
+.rsvp-form input[type="number"],
+.rsvp-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #181c35;
+    border-radius: 14px;
+    background-color: transparent;
+    color: #181c35;
+    font-size: 14pt;
+    line-height: 1.3;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.rsvp-form input::placeholder,
+.rsvp-form textarea::placeholder {
+    color: rgba(24, 28, 53, 0.65);
+}
+
+.rsvp-form textarea {
+    resize: vertical;
+}
+
+/* Eigen focus-stijl zonder standaard blauw/witte browserring */
+.rsvp-form input:focus,
+.rsvp-form textarea:focus,
+.rsvp-form button:focus {
+    outline: none;
+}
+
+.rsvp-form input[type="text"]:focus-visible,
+.rsvp-form input[type="number"]:focus-visible,
+.rsvp-form textarea:focus-visible {
+    background-color: rgba(24, 28, 53, 0.06);
+    border-color: #b83e61;
+}
+
+.rsvp-form button:focus-visible,
+.rsvp-form input[type="radio"]:focus-visible {
+    box-shadow: 0 0 0 3px rgba(184, 62, 97, 0.35);
+}
+
+/* Keuzerondjes: naast elkaar op desktop, onder elkaar op mobiel */
+.rsvp-form .radio-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+}
+
+.rsvp-form .radio-option {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 14pt;
+    line-height: 1.2;
+}
+
+.rsvp-form .radio-option span {
+    display: inline-block;
+}
+
+.rsvp-form .radio-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #181c35;
+    border-radius: 50%;
+    background-color: transparent;
+    display: inline-grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.rsvp-form .radio-option input[type="radio"]:checked::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #181c35;
+}
+
+@media (max-width: 600px) {
+    .rsvp-form .radio-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+}
+
+/* Stepper (- [1] +): pijltjes weg en + / - exact gecentreerd */
+.rsvp-form .stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rsvp-form .stepper-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 2px solid #181c35;
+    border-radius: 12px;
+    background-color: transparent;
+    color: #181c35;
+    font-size: 18pt;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.rsvp-form .stepper-btn:hover {
+    background-color: rgba(24, 28, 53, 0.08);
+}
+
+.rsvp-form .stepper input[type="number"] {
+    width: 68px;
+    height: 44px;
+    padding: 0 8px;
+    text-align: center;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.rsvp-form .stepper input[type="number"]::-webkit-outer-spin-button,
+.rsvp-form .stepper input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Nummer & artiest naast elkaar */
+.rsvp-form .song-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 600px) {
+    .rsvp-form .song-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Actieknoppen */
+.rsvp-form .step-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.rsvp-form .step-actions--split {
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.rsvp-form .btn-primary {
+    background-color: #b83e61;
+    color: #ead85b;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.rsvp-form .btn-primary:hover {
+    background-color: #a13453;
+}
+
+.rsvp-form .btn-secondary {
+    background-color: transparent;
+    color: #181c35;
+    border: 2px solid #181c35;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.rsvp-form .btn-secondary:hover {
+    background-color: rgba(24, 28, 53, 0.08);
+}
+
+/* Foutmeldingen direct onder een veld in #b83e61 */
+.rsvp-form .field-error {
+    margin: 6px 0 0;
+    min-height: 0;
+    text-align: left;
+    font-size: 11.5pt;
+    line-height: 14pt;
+    color: #b83e61;
+}
+
+.rsvp-form .field-error:empty {
+    display: none;
+}
+
+.rsvp-form .input-invalid {
+    border-color: #b83e61 !important;
+}
+
+/* Algemene statusmelding (bijv. bij versturen) */
+.rsvp-form .rsvp-status {
+    margin-top: 16px;
+    text-align: left;
+    font-size: 13pt;
+    line-height: 16pt;
+    color: #181c35;
+}
+
+/* --- Locaties --- */
+
+iframe {
+    width: 100%;
+    height: 150px;
+    border: 0;
+    border-radius: 12px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.locatie-tekst h3 {
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.locatie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Footer --- */
+
+.footer-tekst svg {
+    margin-top: 40px;
+    width: 130px;
+    height: auto;
+}
+
+footer {
+    margin-bottom: 120px;
+}
+
+footer p {
+    margin-top: 8px;
+    font-size: 14pt;
+    line-height: 16pt;
+}

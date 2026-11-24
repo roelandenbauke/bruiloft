@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bruiloftwebsite Bauke & Roeland</title>
+
+    <meta name="description" content="Hier vind je alle informatie over onze bruiloft.">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/wpx0htk.css">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <header class="hero-header">
+        <div class="hero-stage" aria-label="Save the date fotoslideshow">
+            <div class="slideshow-track">
+                <!-- Voeg hier zoveel foto's toe als je wilt; de loop gaat automatisch -->
+                <img class="slide is-active"
+                    src="img/Slider-loop/98BC18F3-9365-4F9E-ABA0-14AF550B8F8A-60435-000008A0A3A02E39.JPG" />
+                <img class="slide"
+                    src="img/Slider-loop/C2FD1264-9963-4583-ADE0-3E7614B331B1-781-000000121F5A2E69.JPG" />
+                <img class="slide"
+                    src="img/Slider-loop/DE2636A2-1F5D-40D6-8B5B-7256709DD3AA-60435-000008A0AD27E70B.JPG" />
+                <img class="slide" src="img/Slider-loop/DSCF3335.JPG" />
+                <img class="slide" src="img/Slider-loop/DSCF3342.JPG" />
+                <img class="slide" src="img/Slider-loop/DSCF3347.JPG" />
+            </div>
+
+            <!-- PNG-logo als overlay over de wisselende foto's -->
+            <img class="hero-logo-overlay" src="img/Slider-loop/Save-the-date-15.png"
+                alt="R&B — Save the date — 19·05·28" />
+        </div>
+
+        <div class="header-content smal">
+            <h1>Save&nbsp;the&nbsp;date</h1>
+            <h3>19•05•2028</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.</p>
+
+            <div class="agenda-buttons">
+                <button type="button" class="btn-agenda-google"><a href="https://www.addevent.com/event/293gxfvz9zy1"
+                        target="_blank">Voeg
+                        toe aan je Agenda</a>
+                    <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async
+                        defer></script>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="planning-header smal">
+            <h2>Planning</h2>
+            <h3>Wat je van de dag kunt verwachten</h3>
+        </section>
+        <section class="planning">
+            <div class="carousel-viewport">
+                <div class="carousel-track">
+                    <article class="card">
+                        <img class="card-bg" src="img/Save-the-date-11.png" />
+                        <div class="tekst-card">
+                            <p class="time">15:00 · 15:30</p>
+                            <h3>Ceremonie op<br>het gemeentehuis</h3>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card-bg" src="img/Save-the-date-10.png" />
+                        <div class="tekst-card">
+                            <p class="time">15:30 · 16:00</p>
+                            <h3>Verplaatsen<br>van locatie</h3>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card-bg" src="img/Save-the-date-08.png" />
+                        <div class="tekst-card">
+                            <p class="time">16:00 · 18:00</p>
+                            <h3>Receptie bij<br>Villa van Waning</h3>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card-bg" src="img/Save-the-date-09.png" />
+                        <div class="tekst-card">
+                            <p class="time">18:00 · 21:00</p>
+                            <h3>Een heerlijk<br>3-gangen diner</h3>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card-bg" src="img/Save-the-date-12.png" />
+                        <div class="tekst-card">
+                            <p class="time">21:00 · 00:00</p>
+                            <h3>Tijd om<br>te gaan dansen</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="controls-wrapper">
+                <div class="controls">
+                    <button type="button" class="btn prev" aria-label="Vorige"><span
+                            style="display: inline-block; transform: scaleX(-1);">&#10140;</span></button>
+                    <button type="button" class="btn next" aria-label="Volgende">&#10140;</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="RSVP smal">
+            <form id="rsvpForm" class="rsvp-form" novalidate>
+                <h2 class="rsvp-title">Laat weten of je erbij bent</h2>
+
+                <!-- Stap 1: Naam + keuze -->
+                <div id="stepOne" class="rsvp-step">
+                    <div class="form-group">
+                        <label for="naam">Wat is je naam?</label>
+                        <input id="naam" name="naam" type="text" placeholder="Naam / Namen" required />
+                        <p id="naamError" class="field-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="group-label">Ben je erbij?</span>
+                        <div class="radio-row">
+                            <label class="radio-option">
+                                <input type="radio" name="aanwezig" value="ja" />
+                                <span>Jazeker!</span>
+                            </label>
+
+                            <label class="radio-option">
+                                <input type="radio" name="aanwezig" value="nee" />
+                                <span>Helaas niet...</span>
+                            </label>
+                        </div>
+                        <p id="aanwezigError" class="field-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" id="nextBtn" class="btn-primary">volgende</button>
+                    </div>
+                </div>
+
+                <!-- Stap 2: Alleen zichtbaar bij "Jazeker!" -->
+                <div id="stepTwo" class="rsvp-step" hidden>
+                    <div class="form-group">
+                        <label for="aantalPersonen">Hoeveel van de uitgenodigde personen zullen aanwezig zijn?</label>
+                        <div class="stepper" role="group" aria-label="Aantal personen">
+                            <button type="button" id="minusBtn" class="stepper-btn"
+                                aria-label="Minder personen">−</button>
+                            <input id="aantalPersonen" name="aantalPersonen" type="number" value="1" min="1" max="20"
+                                step="1" />
+                            <button type="button" id="plusBtn" class="stepper-btn" aria-label="Meer personen">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dieetOpmerkingen">
+                            Zijn er dieetwensen, allergieën of andere bijzonderheden waar rekening mee gehouden moet
+                            worden?
+                        </label>
+                        <textarea id="dieetOpmerkingen" name="dieetOpmerkingen" rows="3"
+                            placeholder="Schrijf bijvoorbeeld op: [Naam] = vegetarisch, allergieën..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dansNummer">
+                            Welk nummer zorgt ervoor dat jij bij het feest sowieso zult gaan dansen?
+                        </label>
+                        <div class="song-fields">
+                            <input id="dansNummer" name="dansNummer" type="text" placeholder="Nummer" />
+                            <input id="dansArtiest" name="dansArtiest" type="text" placeholder="Artiest" />
+                        </div>
+                    </div>
+
+                    <div class="step-actions step-actions--split">
+                        <button type="button" id="backBtn" class="btn-secondary">terug</button>
+                        <button type="submit" id="rsvpSubmit" class="btn-primary">verstuur</button>
+                    </div>
+                </div>
+
+                <p id="rsvpStatus" class="rsvp-status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="locaties smal">
+            <div class="locatie-header">
+                <h2>Vervoer naar de locatie(s)</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy</p>
+            </div>
+            <div class="locatie-items">
+                <div class="locatie-item">
+                    <div class="locatie-tekst">
+                        <h3>Ceremonie Rotterdam</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.</p>
+                    </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.211114366699!2d4.506446076443402!3d51.91185928107668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c433597950b7c5%3A0xcb37046e672d372a!2sStadhuis%20Rotterdam!5e0!3m2!1snl!2snl!4v1795375656025!5m2!1snl!2snl"
+                        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+                <div class="locatie-item">
+                    <div class="locatie-tekst">
+                        <h3>Villa van Waning</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                            tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.</p>
+                    </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.211114366699!2d4.506446076443402!3d51.91185928107668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c433441f7d8725%3A0xa17ef38cfd9cb1e4!2sVilla%20van%20Waning!5e0!3m2!1snl!2snl!4v1795375585467!5m2!1snl!2snl"
+                        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-tekst  smal">
+            <h2>We kijken er naar uit om je daar te zien!</h2>
+            <p>Liefs, Roeland & Bauke</p>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <svg id="Laag_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 76.91 59.46">
+                <!-- Generator: Adobe Illustrator 31.0.0, SVG Export Plug-In . SVG Version: 2.1.5 Build 84)  -->
+                <defs>
+                    <style>
+                        .st0 {
+                            fill: #b83e61;
+                        }
+                    </style>
+                </defs>
+                <path class="st0"
+                    d="M38.45,0C17.22,0,0,13.31,0,29.73s17.22,29.73,38.45,29.73,38.46-13.31,38.46-29.73S59.69,0,38.45,0ZM55.65,42.47h-12.73l-14.02.26-6.46-8.98v8.98h-8.92v-25.47h8.92l.09,2.26c-1.27,1.15-3.15,4.65-3.15,8.79l1.66.22c0-.76.13-3.79,1.97-6.53,3.41-5.06,9.81-6.81,14.43-3.79,1.6,1.05,2.91,2.65,3.78,4.5v-5.72h14.36c3.89,0,6.82,2.52,6.82,5.89s-1.53,5.89-7.61,5.89v.96c6.65,0,8.59,2.74,8.59,6.37S60.07,42.47,55.65,42.47Z" />
+                <path class="st0"
+                    d="M56.63,25.72c0-.89-.6-1.4-1.69-1.4h-4.93v3.02h4.93C56.03,27.34,56.63,26.77,56.63,25.72Z" />
+                <path class="st0"
+                    d="M45.73,27.41h-1.99l-.88,1.38-.39-.5-.4-.51q.2-.13.38-.26c.8-.61,1.16-1.28,1.16-2.04,0-1-.76-1.7-1.85-1.7-.03,0-.06,0-.09,0-.15.01-.3.03-.45.06-1.21.24-2.23,1.29-2.23,2.57,0,.51.18.97.5,1.36-1.43.86-2.03,1.69-2.03,2.72,0,1.25,1.07,2.04,2.39,2.04.47,0,.92-.08,1.37-.26.21-.08.41-.17.62-.29.23-.13.47-.29.72-.48l.79,1.03,1.53-1.28-.94-1.17c.3-.32.53-.6.67-.84L45.73,27.41ZM41.22,30.5c-.24.15-.48.22-.8.22-.49,0-.83-.25-.83-.67,0-.32.19-.65.46-.86l.38-.28.79.98.3.37C41.42,30.36,41.32,30.43,41.22,30.5ZM41.22,26.74s-.03.02-.04.03c-.18-.24-.32-.47-.32-.75,0-.29.14-.54.36-.65.08-.04.17-.06.27-.06.26,0,.39.14.39.41C41.88,26.04,41.7,26.33,41.22,26.74Z" />
+                <path class="st0"
+                    d="M55.26,31.16h-5.25v3.03h5.25c1.28,0,1.98-.58,1.98-1.63C57.24,31.67,56.54,31.16,55.26,31.16Z" />
+                <path class="st0"
+                    d="M33.58,20.06c-1.46-.86-4.23.96-6.17,4.17-2.04,3.15-2.46,6.37-1.02,7.23,1.4.86,4.17-1.02,6.17-4.17C34.54,24.1,34.98,20.92,33.58,20.06Z" />
+            </svg>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
