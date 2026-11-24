@@ -218,8 +218,7 @@ function pasGastVeldenToe() {
 
     if (aantalInput) {
         aantalInput.max = String(MAX_PERSONEN);
-        const startWaarde = Math.min(MIN_PERSONEN_JA, MAX_PERSONEN);
-        aantalInput.value = String(startWaarde);
+        aantalInput.value = String(MAX_PERSONEN);
     }
 
     if (form.dieetOpmerkingen) {
@@ -327,7 +326,7 @@ if (form) {
 
             if (aantalInput) {
                 aantalInput.max = String(MAX_PERSONEN);
-                aantalInput.value = String(Math.min(MIN_PERSONEN_JA, MAX_PERSONEN));
+                aantalInput.value = String(MAX_PERSONEN);
             }
             if (form.dieetOpmerkingen && !form.dieetOpmerkingen.value.trim()) {
                 form.dieetOpmerkingen.value = getDieetPrefix();
@@ -348,7 +347,7 @@ if (form) {
 
     if (minusBtn && aantalInput) {
         minusBtn.addEventListener('click', () => {
-            const huidige = parseInt(aantalInput.value, 10) || MIN_PERSONEN_JA;
+            const huidige = parseInt(aantalInput.value, 10) || MAX_PERSONEN;
             if (huidige > MIN_PERSONEN_JA) {
                 aantalInput.value = String(huidige - 1);
             }
@@ -357,7 +356,7 @@ if (form) {
 
     if (plusBtn && aantalInput) {
         plusBtn.addEventListener('click', () => {
-            const huidige = parseInt(aantalInput.value, 10) || MIN_PERSONEN_JA;
+            const huidige = parseInt(aantalInput.value, 10) || MAX_PERSONEN;
             if (huidige < MAX_PERSONEN) {
                 aantalInput.value = String(huidige + 1);
             }
@@ -390,7 +389,7 @@ if (form) {
             return;
         }
 
-        const aantalPersonen = aantalInput ? (parseInt(aantalInput.value, 10) || MIN_PERSONEN_JA) : MIN_PERSONEN_JA;
+        const aantalPersonen = aantalInput ? (parseInt(aantalInput.value, 10) || MAX_PERSONEN) : MAX_PERSONEN;
         const dieetOpmerkingen = form.dieetOpmerkingen?.value.trim() || '';
         const nummer = form.dansNummer?.value.trim() || '';
         const artiest = form.dansArtiest?.value.trim() || '';
