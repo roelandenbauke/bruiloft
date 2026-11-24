@@ -23,7 +23,27 @@
 </head>
 
 <body>
+    <!-- Code-poort voor bezoekers zonder geldige ?gast= code -->
+<div id="codeGate" class="code-gate" hidden>
+    <div class="code-gate-frame">
+        <img class="code-gate-bg"
+            src="img/Slider-loop/98BC18F3-9365-4F9E-ABA0-14AF550B8F8A-60435-000008A0A3A02E39.JPG"
+            alt="" />
 
+        <form id="codeGateForm" class="code-gate-card" novalidate>
+            <h2>Welkom!</h2>
+            <p class="code-gate-sub">Vul hieronder de code in uit je uitnodiging:</p>
+
+            <div class="code-gate-row">
+                <input id="codeInput" type="text" placeholder="Code" autocomplete="off" />
+                <button type="submit" class="code-gate-btn">openen</button>
+            </div>
+
+            <p id="codeError" class="code-gate-error" aria-live="polite"></p>
+        </form>
+    </div>
+</div>
+    
     <header class="hero-header">
         <div class="hero-stage" aria-label="Save the date fotoslideshow">
             <div class="slideshow-track">
