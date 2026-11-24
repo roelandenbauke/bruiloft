@@ -1,8 +1,7 @@
 // ==========================================
 // 0. GASTENCONFIGURATIE (?gast=CODE)
 // ==========================================
-// Vul hier per unieke code de gegevens in.
-// Gebruik kleine letters voor de code in de lijst; in de URL maakt hoofd/klein niet uit.
+// Vul hier per unieke code de gegevens in (gebruik kleine letters).
 // type: 'dag' of 'avond'
 // maxPersonen: het maximale aantal gasten voor deze uitnodiging
 // begroeting: optioneel; als je dit leeg laat wordt "Hoi [naam]!" gebruikt.
@@ -30,16 +29,77 @@ const STANDAARD_GAST = {
     begroeting: ''
 };
 
-function getActieveGast() {
+function leesGastUitUrl() {
     const params = new URLSearchParams(window.location.search);
-    const code = (params.get('gast') || '').trim().toLowerCase();
-    if (code && GASTEN_LIJST[code]) {
-        return GASTEN_LIJST[code];
+    const ruweCode = (params.get('gast') || '').trim();
+    const codeKey = ruweCode.toLowerCase();
+
+    if (codeKey && GASTEN_LIJST[codeKey]) {
+        return {
+            gast: GASTEN_LIJST[codeKey],
+            code: codeKey,
+            geldig: true
+        };
     }
-    return STANDAARD_GAST;
+
+    return {
+        gast: STANDAARD_GAST,
+        code: '',
+        geldig: false
+    };
 }
 
-const actieveGast = getActieveGast();
+const sessieGast = leesGastUitUrl();
+const actieveGast = sessieGast.gast;
+
+// Code-scherm tonen als er geen geldige ?gast= code in de URL staat
+const codeGateEl = document.getElementById('codeGate');
+const codeGateForm = document.getElementById('codeGateForm');
+const codeInput = document.getElementById('codeInput');
+const codeErrorEl = document.getElementById('codeError');
+
+const hoofdHeader = document.querySelector('header');
+const hoofdMain = document.querySelector('main');
+const hoofdFooter = document.querySelector('footer');
+
+function zetPaginaZichtbaar(zichtbaar) {
+    if (hoofdHeader) hoofdHeader.hidden = !zichtbaar;
+    if (hoofdMain) hoofdMain.hidden = !zichtbaar;
+    if (hoofdFooter) hoofdFooter.hidden = !zichtbaar;
+}
+
+if (!sessieGast.geldig && codeGateEl) {
+    zetPaginaZichtbaar(false);
+    codeGateEl.hidden = false;
+} else if (codeGateEl) {
+    codeGateEl.hidden = true;
+    zetPaginaZichtbaar(true);
+}
+
+if (codeGateForm && codeInput) {
+    codeInput.addEventListener('input', () => {
+        codeInput.value = codeInput.value.toLowerCase();
+        if (codeErrorEl) codeErrorEl.textContent = '';
+    });
+
+    codeGateForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const ingevuldeCode = codeInput.value.trim().toLowerCase();
+        codeInput.value = ingevuldeCode;
+
+        if (!ingevuldeCode || !GASTEN_LIJST[ingevuldeCode]) {
+            if (codeErrorEl) {
+                codeErrorEl.textContent = 'Deze code klopt niet helemaal. Controleer je uitnodiging en probeer het opnieuw.';
+            }
+            codeInput.focus();
+            return;
+        }
+
+        const nieuweUrl = new URL(window.location.href);
+        nieuweUrl.searchParams.set('gast', ingevuldeCode);
+        window.location.href = nieuweUrl.toString();
+    });
+}
 
 // ==========================================
 // HERO FOTOSLIDESHOW (EINDELOZE LOOP)
