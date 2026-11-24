@@ -335,12 +335,12 @@ const GASTEN_LIJST = {
 };
 
 // Standaardinstellingen als iemand de link zonder ?gast=... of met een onbekende code opent
-const STANDAARD_GAST = {
-    naam: '',
-    type: 'dag',
-    maxPersonen: 1,
-    begroeting: ''
-};
+// const STANDAARD_GAST = {
+//    naam: '',
+//    type: 'dag',
+//    maxPersonen: 1,
+//    begroeting: ''
+// };
 
 function leesGastUitUrl() {
     const params = new URLSearchParams(window.location.search);
