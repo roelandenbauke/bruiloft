@@ -7,17 +7,330 @@
 // begroeting: optioneel; als je dit leeg laat wordt "Hoi [naam]!" gebruikt.
 // namen: optioneel; bijv. ['Rob', 'Henriët'] als je een lijst met losse namen wilt opgeven.
 const GASTEN_LIJST = {
-    '3r0k7l1': {
-        naam: 'Rianne',
+    ‘bruidspaar’: {
+        naam: ‘Roeland & Bauke’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ‘Hey Bauk, mooie website vind je niet?’
+    },
+    'fredrike': {
+        naam: ‘Fred & Rike’,
+        type: ‘dag’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘joskarel’: {
+        naam: ‘José & Carlan’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘maaikruub’: {
+        naam: ‘Maaike & Ruben’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘rietje’: {
+        naam: ‘Rianne’,
         type: 'dag',
         maxPersonen: 1,
-        begroeting: 'Lieve Rianne, wat fijn dat je erbij bent op onze mooie dag!'
+        begroeting: ''
     },
-    '3r0l3h5b': {
-        naam: 'Rob & Henriët',
-        type: 'avond',
+    ‘anneakkie’: {
+        naam: ‘Anne & Akkie’,
+        type: 'dag',
         maxPersonen: 2,
-        begroeting: 'Lieve Rob & Henriët, we kijken er naar uit om jullie op ons bruiloftfeest te mogen ontvangen!'
+        begroeting: ''
+    },
+    ‘riarens’: {
+        naam: ‘Ria & Rens’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘leo’: {
+        naam: ‘Leo’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘lisa’: {
+        naam: ‘Lisa’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘thea’: {
+        naam: ‘Thea’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘mickynino’: {
+        naam: ‘Micky & Nino’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘josanke’: {
+        naam: ‘Jos & Anke’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘baswilma’: {
+        naam: ‘Bas & Wilma,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘gerritrennie’: {
+        naam: ‘Gerrit & Rennie’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘roosmaurits’: {
+        naam: ‘Roos & Maurits’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘robin’: {
+        naam: ‘Robin,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘nanne’: {
+        naam: ‘Nanne’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘kayjaydae’: {
+        naam: ‘Kaylee, Jay & Dae’,
+        type: 'dag',
+        maxPersonen: 3,
+        begroeting: ''
+    },
+    ‘cornelis’: {
+        naam: ‘Cees,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘isabelle’: {
+        naam: ‘Isabelle’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘pascalemaarten’: {
+        naam: ‘Pascale & Maarten’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘babs’: {
+        naam: ‘Babs’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘femsjoerd’: {
+        naam: ‘Fem & Sjoerd’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘tiff’: {
+        naam: ‘Tiffani’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘nohemi’: {
+        naam: ‘Nohemi’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘leoannette’: {
+        naam: ‘Leo & Annette’,
+        type: 'dag',
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘sjaan’: {
+        naam: ‘Sjaan’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘lealenoir’: {
+        naam: ‘Lea’,
+        type: 'dag',
+        maxPersonen: 1,
+        begroeting: ''
+    },
+
+    ‘femdik’: {
+        naam: ‘Femke & Dik’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘luca’: {
+        naam: ‘Luca’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘guillio’: {
+        naam: ‘Guillio’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘robhenriet89a’: {
+        naam: ‘Rob & Henriët’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘janjoke39’: {
+        naam: ‘Jan & Joke’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘familieklijnstra’: {
+        naam: ‘Elise, Erik, Julia & Noah’,
+        type: ‘avond’,
+        maxPersonen: 4,
+        begroeting: ''
+    },
+    ‘martijnmarloes’: {
+        naam: ‘Martijn & Marloes’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘renesharon’: {
+        naam: ‘René en Sharon’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘simonenick’: {
+        naam: ‘Simone & Nick’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘familienoordzij’: {
+        naam: ‘Dennis, Simone, Annelot, Teije & Dianne’,
+        type: ‘avond’,
+        maxPersonen: 5,
+        begroeting: ''
+    },
+    ‘remco’: {
+        naam: ‘Remco’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘maurice’: {
+        naam: ‘Maurice’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘elis’: {
+        naam: ‘Elis’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘tijmen’: {
+        naam: ‘Tijmen’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘veerle’: {
+        naam: ‘Veerle’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘ditte’: {
+        naam: ‘Ditte’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘victoria’: {
+        naam: ‘Victoria’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘bente’: {
+        naam: ‘Bente’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘anne’: {
+        naam: ‘Anne’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘nienke’: {
+        naam: ‘Nienke’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘reneeniek’: {
+        naam: ‘Renee & Niek’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘carlijn’: {
+        naam: ‘Carlijn & ?’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘luuk’: {
+        naam: ‘Luuk’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘jelmer’: {
+        naam: ‘Jelmer’,
+        type: ‘avond’,
+        maxPersonen: 1,
+        begroeting: ''
+    },
+    ‘arjenlaura’: {
+        naam: ‘Arjen & Laura’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
+    },
+    ‘annabeljob’: {
+        naam: ‘Annabel & Job’,
+        type: ‘avond’,
+        maxPersonen: 2,
+        begroeting: ''
     }
 };
 
