@@ -35,7 +35,7 @@
                 <img class="slide"
                     src="img/Slider-loop/DE2636A2-1F5D-40D6-8B5B-7256709DD3AA-60435-000008A0AD27E70B.JPG" />
                 <img class="slide" src="img/Slider-loop/DSCF3335.JPG" />
-                <img class="slide" src="img/DSCF3342.jpg" />
+                <img class="slide" src="img/DSCF3342.JPG" />
                 <img class="slide" src="img/Slider-loop/DSCF3347.JPG" />
             </div>
 
@@ -45,10 +45,9 @@
         </div>
 
         <div class="header-content smal">
-            <h1>Save&nbsp;the&nbsp;date</h1>
+            <h1>Save the date</h1>
             <h3>19•05•2028</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.</p>
+            <p id="persoonlijkeBegroeting" class="persoonlijke-begroeting" hidden></p>
 
             <div class="agenda-buttons">
                 <button type="button" class="btn-agenda-google"><a href="https://www.addevent.com/event/293gxfvz9zy1"
@@ -70,7 +69,7 @@
         <section class="planning">
             <div class="carousel-viewport">
                 <div class="carousel-track">
-                    <article class="card">
+                    <article class="card" data-groep="dag">
                         <img class="card-bg" src="img/Save-the-date-11.png" />
                         <div class="tekst-card">
                             <p class="time">15:00 · 15:30</p>
@@ -78,7 +77,7 @@
                         </div>
                     </article>
 
-                    <article class="card">
+                    <article class="card" data-groep="dag">
                         <img class="card-bg" src="img/Save-the-date-10.png" />
                         <div class="tekst-card">
                             <p class="time">15:30 · 16:00</p>
@@ -86,7 +85,7 @@
                         </div>
                     </article>
 
-                    <article class="card">
+                    <article class="card" data-groep="dag">
                         <img class="card-bg" src="img/Save-the-date-08.png" />
                         <div class="tekst-card">
                             <p class="time">16:00 · 18:00</p>
@@ -94,7 +93,7 @@
                         </div>
                     </article>
 
-                    <article class="card">
+                    <article class="card" data-groep="dag">
                         <img class="card-bg" src="img/Save-the-date-09.png" />
                         <div class="tekst-card">
                             <p class="time">18:00 · 21:00</p>
@@ -102,7 +101,17 @@
                         </div>
                     </article>
 
-                    <article class="card">
+                    <!-- Nieuwe 1e slide voor avondgasten -->
+                    <article class="card" data-groep="avond">
+                        <img class="card-bg" src="img/Save-the-date-08.png" />
+                        <div class="tekst-card">
+                            <p class="time">20:00 · 21:00</p>
+                            <h3>Welkom op<br>de bruiloft</h3>
+                        </div>
+                    </article>
+
+                    <!-- Laatste slide (ook zichtbaar voor avondgasten) -->
+                    <article class="card" data-groep="avond">
                         <img class="card-bg" src="img/Save-the-date-12.png" />
                         <div class="tekst-card">
                             <p class="time">21:00 · 00:00</p>
@@ -202,7 +211,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy</p>
             </div>
             <div class="locatie-items">
-                <div class="locatie-item">
+                <div class="locatie-item" data-locatie="dag">
                     <div class="locatie-tekst">
                         <h3>Ceremonie Rotterdam</h3>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -212,7 +221,7 @@
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2461.211114366699!2d4.506446076443402!3d51.91185928107668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c433597950b7c5%3A0xcb37046e672d372a!2sStadhuis%20Rotterdam!5e0!3m2!1snl!2snl!4v1795375656025!5m2!1snl!2snl"
                         referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
-                <div class="locatie-item">
+                <div class="locatie-item" data-locatie="avond">
                     <div class="locatie-tekst">
                         <h3>Villa van Waning</h3>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
