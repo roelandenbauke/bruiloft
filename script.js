@@ -2,9 +2,11 @@
 // 0. GASTENCONFIGURATIE (?gast=CODE)
 // ==========================================
 // Vul hier per unieke code de gegevens in.
+// Gebruik kleine letters voor de code in de lijst; in de URL maakt hoofd/klein niet uit.
 // type: 'dag' of 'avond'
 // maxPersonen: het maximale aantal gasten voor deze uitnodiging
 // begroeting: optioneel; als je dit leeg laat wordt "Hoi [naam]!" gebruikt.
+// namen: optioneel; bijv. ['Rob', 'Henriët'] als je een lijst met losse namen wilt opgeven.
 const GASTEN_LIJST = {
     '3r0k7l1': {
         naam: 'Rianne',
@@ -12,11 +14,11 @@ const GASTEN_LIJST = {
         maxPersonen: 1,
         begroeting: 'Lieve Rianne, wat fijn dat je erbij bent op onze mooie dag!'
     },
-    '3r0l3h5': {
+    '3r0l3h5b': {
         naam: 'Rob & Henriët',
         type: 'avond',
         maxPersonen: 2,
-        begroeting: 'Lieve Rob & Henriët, we kijken er naar uit om jullie op ons bruilodtfeest te mogen ontvangen!'
+        begroeting: 'Lieve Rob & Henriët, we kijken er naar uit om jullie op ons bruiloftfeest te mogen ontvangen!'
     }
 };
 
@@ -69,16 +71,19 @@ if (begroetingEl) {
     }
 }
 
-// Bij avondgasten alleen kaarten met data-groep="avond" tonen (de nieuwe slide + laatste slide)
+// Daggasten: verberg kaarten met data-groep="alleen-avond"
+// Avondgasten: toon alleen kaarten met data-groep="avond" en data-groep="alleen-avond"
 const planningCards = Array.from(document.querySelectorAll('.carousel-track .card'));
-if (actieveGast.type === 'avond') {
-    planningCards.forEach((card) => {
-        const groep = card.getAttribute('data-groep');
-        card.hidden = (groep !== 'avond');
-    });
-}
+planningCards.forEach((card) => {
+    const groep = card.getAttribute('data-groep');
+    if (actieveGast.type === 'avond') {
+        card.hidden = (groep !== 'avond' && groep !== 'alleen-avond');
+    } else {
+        card.hidden = (groep === 'alleen-avond');
+    }
+});
 
-// Bij avondgasten alleen de tweede locatie (data-locatie="avond") tonen
+// Bij avondgasten alleen de locatie met data-locatie="avond" tonen
 const locatieItems = Array.from(document.querySelectorAll('.locatie-items .locatie-item'));
 if (actieveGast.type === 'avond') {
     locatieItems.forEach((item) => {
@@ -141,6 +146,27 @@ window.addEventListener('resize', () => {
 });
 
 // ==========================================
+// 2. VIDEO + MUTE KNOP (OPTIONEEL)
+// ==========================================
+const video = document.getElementById('bgVideo');
+const muteBtn = document.getElementById('muteToggle');
+
+if (video && muteBtn) {
+    muteBtn.addEventListener('click', () => {
+        video.muted = !video.muted;
+
+        const isUnmuted = !video.muted;
+        muteBtn.setAttribute('aria-pressed', String(isUnmuted));
+        muteBtn.setAttribute('aria-label', isUnmuted ? 'Geluid uitzetten' : 'Geluid aanzetten');
+        muteBtn.textContent = isUnmuted ? '🔊 Geluid uit' : '🔇 Geluid aan';
+
+        if (isUnmuted && video.paused) {
+            video.play();
+        }
+    });
+}
+
+// ==========================================
 // 3. RSVP FORMULIER (MET GASTGEGEVENS)
 // ==========================================
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymhzee1YEidu00_63GFlKRtblAwNENA9GHSFW_YSDtUW7YXc13WUlfEYxbAfPLtaGC/exec';
@@ -163,9 +189,24 @@ const aanwezigErrorEl = document.getElementById('aanwezigError');
 const MIN_PERSONEN_JA = 1;
 const MAX_PERSONEN = actieveGast.maxPersonen || 20;
 
+function getLosseNamen() {
+    if (Array.isArray(actieveGast.namen) && actieveGast.namen.length > 0) {
+        return actieveGast.namen.map((n) => n.trim()).filter(Boolean);
+    }
+
+    const ruweNaam = (form?.naam?.value || actieveGast.naam || '').trim();
+    if (!ruweNaam) return [];
+
+    return ruweNaam
+        .split(/\s*(?:&|,|\ben\b)\s*/i)
+        .map((n) => n.trim())
+        .filter(Boolean);
+}
+
 function getDieetPrefix() {
-    const huidigeNaam = (form?.naam?.value || actieveGast.naam || '').trim();
-    return huidigeNaam ? `${huidigeNaam} - allergieën: ` : '';
+    const namen = getLosseNamen();
+    if (namen.length === 0) return '';
+    return namen.map((losseNaam) => `${losseNaam} - allergieën: `).join('\n');
 }
 
 function pasGastVeldenToe() {
@@ -289,7 +330,7 @@ if (form) {
                 aantalInput.value = String(Math.min(MIN_PERSONEN_JA, MAX_PERSONEN));
             }
             if (form.dieetOpmerkingen && !form.dieetOpmerkingen.value.trim()) {
-                form.dieetOpmerkingen.value = `${naam} - allergieën: `;
+                form.dieetOpmerkingen.value = getDieetPrefix();
             }
             if (stepOne) stepOne.hidden = true;
             if (stepTwo) stepTwo.hidden = false;
