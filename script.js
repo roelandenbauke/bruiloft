@@ -110,7 +110,7 @@ const GASTEN_LIJST = {
         begroeting: ''
     },
     ‘kayjaydae’: {
-        naam: ‘Kaylee, Jay & Dae’,
+        naam: ‘Kaylee & Jay & Dae’,
         type: 'dag',
         maxPersonen: 3,
         begroeting: ''
@@ -169,13 +169,13 @@ const GASTEN_LIJST = {
         maxPersonen: 1,
         begroeting: ''
     },
-    ‘lealenoir’: {
+    
+    ‘lea’: {
         naam: ‘Lea’,
-        type: 'dag',
+        type: 'avond',
         maxPersonen: 1,
         begroeting: ''
     },
-
     ‘femdik’: {
         naam: ‘Femke & Dik’,
         type: ‘avond’,
@@ -194,20 +194,20 @@ const GASTEN_LIJST = {
         maxPersonen: 1,
         begroeting: ''
     },
-    ‘robhenriet89a’: {
+    ‘robhenriet’: {
         naam: ‘Rob & Henriët’,
         type: ‘avond’,
         maxPersonen: 2,
         begroeting: ''
     },
-    ‘janjoke39’: {
+    ‘janjoke’: {
         naam: ‘Jan & Joke’,
         type: ‘avond’,
         maxPersonen: 2,
         begroeting: ''
     },
     ‘familieklijnstra’: {
-        naam: ‘Elise, Erik, Julia & Noah’,
+        naam: ‘Elise & Erik & Julia & Noah’,
         type: ‘avond’,
         maxPersonen: 4,
         begroeting: ''
@@ -219,7 +219,7 @@ const GASTEN_LIJST = {
         begroeting: ''
     },
     ‘renesharon’: {
-        naam: ‘René en Sharon’,
+        naam: ‘René & Sharon’,
         type: ‘avond’,
         maxPersonen: 2,
         begroeting: ''
@@ -231,7 +231,7 @@ const GASTEN_LIJST = {
         begroeting: ''
     },
     ‘familienoordzij’: {
-        naam: ‘Dennis, Simone, Annelot, Teije & Dianne’,
+        naam: ‘Dennis & Simone & Annelot & Teije & Dianne’,
         type: ‘avond’,
         maxPersonen: 5,
         begroeting: ''
@@ -303,7 +303,7 @@ const GASTEN_LIJST = {
         begroeting: ''
     },
     ‘carlijn’: {
-        naam: ‘Carlijn & ?’,
+        naam: ‘Carlijn & ’,
         type: ‘avond’,
         maxPersonen: 2,
         begroeting: ''
